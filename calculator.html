@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chit 8 - Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: seashell;
+      padding: 20px;
+    }
+
+    h2 {
+      color: black;
+      text-align: center;
+    }
+
+    input {
+      padding: 8px;
+      width: 200px;
+      border: 1px solid slategrey;
+      margin-bottom: 10px;
+    }
+
+    select {
+      padding: 8px;
+      width: 216px;
+      border: 1px solid black ;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      background-color: skyblue;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: blue;
+    }
+
+    #result {
+      margin-top: 15px;
+      color: blue;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Simple Calculator</h2>
+
+  <input type="number" id="n1" placeholder="Number 1"><br>
+  <input type="number" id="n2" placeholder="Number 2"><br>
+
+  <select id="op">
+    <option value="+">Addition (+)</option>
+    <option value="-">Subtraction (-)</option>
+    <option value="*">Multiplication (*)</option>
+    <option value="/">Division (/)</option>
+  </select><br>
+
+  <button onclick="calculate()">Calculate</button>
+
+  <p id="result"></p>
+
+  <script>
+    function calculate() {
+      let n1 = parseFloat(document.getElementById("n1").value);
+      let n2 = parseFloat(document.getElementById("n2").value);
+      let op = document.getElementById("op").value;
+      let result;
+
+      if (isNaN(n1) || isNaN(n2)) {
+        document.getElementById("result").textContent = "Enter valid numbers!";
+        return;
+      }
+
+      switch (op) {
+        case "+": result = n1 + n2; break;
+        case "-": result = n1 - n2; break;
+        case "*": result = n1 * n2; break;
+        case "/":
+          if (n2 === 0) {
+            document.getElementById("result").textContent = "Cannot divide by zero!";
+            return;
+          }
+          result = n1 / n2;
+          break;
+      }
+
+      document.getElementById("result").textContent = "Result: " + result;
+    }
+  </script>
+</body>
+</html>

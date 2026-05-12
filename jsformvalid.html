@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+  <style>
+    /* Page background and font */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: seashell;
+      padding: 20px;
+    }
+
+    /* Heading style */
+    h2 {
+      color: black;
+      text-align: center;
+    }
+
+    /* Input box style */
+    input {
+      padding: 8px;
+      width: 250px;
+      border: 1px solid black;
+      margin-bottom: 5px;
+    }
+
+    /* Submit button style */
+    button {
+      padding: 8px 14px;
+      background-color:green ;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    /* Button color on hover */
+    button:hover {
+      background-color: springgreen;
+    }
+
+    /* Error message - red text */
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+
+    /* Success message - green text */
+    .success {
+      color: green;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <b>Name</b><br>
+  <form onsubmit="validate(event)">
+    <input type="text" id="name" placeholder="Enter name"><br>
+    <div class="error" id="nameErr"></div><br>
+
+    <b>E-mail</b><br>
+    <input type="text" id="email" placeholder="Enter email"><br>
+    <div class="error" id="emailErr"></div><br>
+
+    
+    <b>Password</b><br>
+    <input type="password" id="pass" placeholder="Enter password"><br>
+    <div class="error" id="passErr"></div><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="success" id="msg"></div>
+
+  <script>
+    function validate(e) {
+      e.preventDefault();
+
+      let name  = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let pass  = document.getElementById("pass").value.trim();
+      let ok = true;
+
+      // Clear old errors
+      document.getElementById("nameErr").textContent  = "";
+      document.getElementById("emailErr").textContent = "";
+      document.getElementById("passErr").textContent  = "";
+      document.getElementById("msg").textContent      = "";
+
+      if (name === "") {
+        document.getElementById("nameErr").textContent = "Name is required";
+        ok = false;
+      }
+
+      if (email === "") {
+        document.getElementById("emailErr").textContent = "Email is required";
+        ok = false;
+      } else if (!email.includes("@")) {
+        document.getElementById("emailErr").textContent = "Enter valid email";
+        ok = false;
+      }
+
+      if (pass === "") {
+        document.getElementById("passErr").textContent = "Password is required";
+        ok = false;
+      } else if (pass.length < 6) {
+        document.getElementById("passErr").textContent = "Minimum 6 characters";
+        ok = false;
+      }
+
+      if (ok) {
+        document.getElementById("msg").textContent = "Form submitted successfully!";
+      }
+    }
+  </script>
+</body>
+</html>
